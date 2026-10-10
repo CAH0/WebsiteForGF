@@ -2,20 +2,151 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приглашение 💌</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff6b9d">
+    <title>Для тебя 💌</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <div class="heart">❤️</div>
-        <h1>У меня к тебе важный вопрос...</h1>
-        <p class="subtitle">Но сначала — небольшое приглашение</p>
-        <button id="openBtn">Открыть</button>
-        <p id="secret" class="secret hidden">
-            Ты пойдёшь со мной на свидание? 🌹
-        </p>
-    </div>
+
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- ЭКРАН 1 -->
+    <section class="screen active" id="screen1">
+        <div class="card">
+            <div class="emoji">💔</div>
+            <h1>Пиет любимая</h1>
+            <p class="subtitle">У меня для тебя есть плохая новость</p>
+            <button class="btn" onclick="nextScreen(2)">Какая!??? 😱</button>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 2 -->
+    <section class="screen" id="screen2">
+        <div class="card">
+            <div class="emoji">😔</div>
+            <h1>Я не смогу приехать к тебе в выходные</h1>
+            <p class="subtitle">И мы не сможем с тобой потусить и пофлексить...</p>
+            <button class="btn" onclick="nextScreen(3)">И что же мы будем делать? 🙄</button>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 3 -->
+    <section class="screen" id="screen3">
+        <div class="card">
+            <div class="emoji">🤫</div>
+            <h1>У меня есть предложение, от которого ты не сможешь отказаться</h1>
+            <p class="subtitle">Выбирай, как ты хочешь это услышать</p>
+            <div class="btn-area">
+                <button class="btn btn-yes" onclick="nextScreen(4)">Я тебя слушаю, любимый 💕</button>
+                <button class="btn btn-no" id="canBtn">Могу 🤔</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 4 -->
+    <section class="screen" id="screen4">
+        <div class="card">
+            <div class="emoji">🎁</div>
+            <h1>То, что ты не ожидаешь</h1>
+            <p class="subtitle">
+                Это правда крутое развлечение.<br>
+                А может, и не просто развлечение...
+            </p>
+            <div class="info-block">
+                <p>К сожалению, в эти выходные подготовить не получилось 😔</p>
+                <p>Для реализации нужен небольшой взнос — <b>1000 ₽</b>.</p>
+                <p>Все остальные расходы я беру на себя</p>
+            </div>
+            <div class="btn-area">
+                <button class="btn btn-yes" onclick="nextScreen(5)">Согласна 💖</button>
+                <button class="btn btn-no" id="disagreeBtn">Не согласна 😤</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 5: Что покушать -->
+    <section class="screen" id="screen5">
+        <div class="card">
+            <div class="emoji">🍽️</div>
+            <h1>Что бы ты хотела покушать?</h1>
+            <p class="subtitle">Выбирай, я всё устрою 💕</p>
+            <p class="hint">🗣️ Проговаривай ответы вслух и параллельно нажимай их на экране</p>
+            <div class="food-list">
+                <button class="btn food-btn" onclick="chooseFood('пельмешки 🥟')">
+                    <span class="food-emoji">🥟</span>
+                    <span class="food-text">Пельмешки</span>
+                </button>
+                <button class="btn food-btn" onclick="chooseFood('шаурму 🌯')">
+                    <span class="food-emoji">🌯</span>
+                    <span class="food-text">Шаурму</span>
+                </button>
+                <button class="btn food-btn" onclick="chooseFood('мак 🍔')">
+                    <span class="food-emoji">🍔</span>
+                    <span class="food-text">Заказать мак</span>
+                </button>
+                <button class="btn food-btn" onclick="chooseFood('что-то на выбор Сашки 👨‍🍳')">
+                    <span class="food-emoji">👨‍🍳</span>
+                    <span class="food-text">Что-то на выбор Сашки</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 6: Что пить -->
+    <section class="screen" id="screen6">
+        <div class="card">
+            <div class="emoji">🥤</div>
+            <h1>Что ты будешь пить?</h1>
+            <p class="subtitle">Выбирай, я всё устрою 💕</p>
+            <p class="hint">🗣️ Проговаривай ответы вслух и параллельно нажимай их на экране</p>
+            <div class="food-list">
+                <button class="btn food-btn" onclick="chooseDrink('кока-колку 🥤')">
+                    <span class="food-emoji">🥤</span>
+                    <span class="food-text">Кока-колку</span>
+                </button>
+                <button class="btn food-btn" onclick="chooseDrink('пиво 🍺')">
+                    <span class="food-emoji">🍺</span>
+                    <span class="food-text">Пиво</span>
+                </button>
+                <button class="btn food-btn" onclick="chooseDrink('просто водичку (( 💧')">
+                    <span class="food-emoji">💧</span>
+                    <span class="food-text">Просто водичку ((</span>
+                </button>
+                <button class="btn food-btn" onclick="chooseDrink('выберем вместе 🤝')">
+                    <span class="food-emoji">🤝</span>
+                    <span class="food-text">Выберем вместе</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 7: ФИНАЛ -->
+    <section class="screen" id="screen7">
+        <div class="card">
+            <div class="emoji">💌</div>
+            <h1>Зайчик</h1>
+            <p class="final-message">
+                Я тебя очень сильно люблю и ценю и крайне сильно боюсь потерять.
+                Надеюсь, такой формат тебя не сильно расстроил и ты на меня не обижаешься.
+                Я сейчас пишу это и думаю, что ты плачешь, так же как я когда писал этот текст.
+                Прости меня за всё, что я плохо делал.
+                И я уверен, что ты выглядишь безумно красиво и сможешь выложить это прохождение себе в телеграм-канал,
+                а то там давно ничего не было.
+                Спасибо, что на всё согласилась 💖
+                Я жду переводик 😌
+                Остальное можешь спросить в телеге.
+                Люблю тебя 💕
+            </p>
+            <p class="final-ps">
+                P.S. Твой вечный поклонник,<br>
+                Сашка Казаков
+            </p>
+            <p class="final-food" id="finalFood"></p>
+            <p class="final-food" id="finalDrink"></p>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
