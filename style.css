@@ -5,9 +5,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+/* ===== Защита от горизонтального скролла ===== */
 html, body {
-    height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 body {
@@ -34,13 +35,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.25rem;
+    padding: 1rem;
     opacity: 0;
     visibility: hidden;
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
     z-index: 1;
     overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 .screen.active {
@@ -55,10 +58,10 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 1.75rem;
-    padding: clamp(2rem, 8vw, 3rem) clamp(1.5rem, 6vw, 2.5rem);
+    border-radius: 1.5rem;
+    padding: clamp(1.5rem, 6vw, 2.5rem) clamp(1.25rem, 5vw, 2rem);
     width: 100%;
-    max-width: 26rem;
+    max-width: min(24rem, calc(100vw - 2rem));
     text-align: center;
     box-shadow:
         0 1.25rem 3.75rem rgba(194, 24, 91, 0.2),
@@ -99,19 +102,23 @@ body {
 }
 
 h1 {
-    font-size: clamp(1.4rem, 6vw, 1.85rem);
+    font-size: clamp(1.25rem, 5.5vw, 1.7rem);
     color: #c2185b;
     line-height: 1.25;
-    margin: 1rem 0 0.75rem;
+    margin: 0.75rem 0 0.6rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .subtitle {
     color: #8a5a6e;
-    font-size: clamp(0.95rem, 4vw, 1.05rem);
+    font-size: clamp(0.9rem, 3.8vw, 1rem);
     line-height: 1.5;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .final-text {
@@ -149,19 +156,21 @@ h1 {
     background: linear-gradient(135deg, #ff6b9d, #c2185b);
     color: #fff;
     border: none;
-    padding: 1rem 2.5rem;
-    font-size: 1.05rem;
+    padding: 0.9rem 1.75rem;
+    font-size: clamp(0.9rem, 3.8vw, 1rem);
     font-weight: 600;
     border-radius: 3rem;
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     box-shadow: 0 0.5rem 1.25rem rgba(194, 24, 91, 0.35);
     min-height: 3rem;
-    min-width: 8rem;
+    max-width: 100%;
     font-family: inherit;
     touch-action: manipulation;
     position: relative;
     overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .btn::after {
@@ -215,20 +224,23 @@ h1 {
     min-height: 8rem;
     padding-top: 0.5rem;
     gap: 1rem;
+    overflow: visible;
 }
 
 .btn-area .btn-yes {
     position: relative;
     z-index: 2;
+    max-width: 100%;
 }
 
 .btn-area .btn-no {
     position: absolute;
-    top: 4.5rem;      /* ← опускаем кнопку ниже основной */
+    top: 4.5rem;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 3;
-    white-space: nowrap;
+    white-space: normal;
+    max-width: 80%;
     will-change: transform;
 }
 
@@ -298,17 +310,19 @@ h1 {
 .food-btn {
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.75rem;
     width: 100%;
-    padding: 1rem 1.25rem;
-    font-size: clamp(0.95rem, 4vw, 1.05rem);
+    padding: 0.9rem 1.1rem;
+    font-size: clamp(0.9rem, 3.8vw, 1rem);
     font-weight: 600;
     line-height: 1.3;
-    border-radius: 1.25rem;
+    border-radius: 1.1rem;
     text-align: left;
     justify-content: flex-start;
-    min-height: 4rem;
+    min-height: 3.75rem;
     white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .food-emoji {
